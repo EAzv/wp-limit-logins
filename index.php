@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  *	Plugin Name: WP Limit Logins
  *	Plugin URI: http://example.com/
  *	Description: Limits the number of active sessions for a user login
@@ -13,7 +13,7 @@ defined('ABSPATH') or die('Never here');
 require_once "wp_limit_logins.php";
 
 
-
+//
 Limit_Logins::Initialize();
 
 
@@ -28,11 +28,12 @@ add_filter('init', function (){
 	);
 });
 
+//
 add_filter('authenticate', function ($user, $username, $password){
 	return	Limit_Logins::Execute($user, $username, $password);
 }, 30, 3);
 
-
+//
 add_action('wp_footer', function(){
 	echo "\n\n<!-- Limit Logins Debugger -->\n\n";
 
