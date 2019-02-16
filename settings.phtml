@@ -1,0 +1,74 @@
+<?php 
+/**
+ * Plugin's admin options form
+ */
+?>
+<div class="wrap" id="wp_limit_logins_config" >
+	<h1><?= esc_html(get_admin_page_title()); ?></h1>
+	<form method="post" action="options.php" >
+		<?php
+			// free all security fields for the group registered setting "wp_limit_logins_options"
+			settings_fields('wp_limit_logins_options');
+
+			// show all the setting sections for the group "wp_limit_logins_options"
+			do_settings_sections('wp_limit_logins_options');
+		?>
+		<table class="form-table">
+			<!--
+			<tr valign="top">
+				<th scope="row" colspan="2" >
+					<h2 style="padding:0px;margin:0px 0px 0px 69px;" > # </h2>
+				</th>
+			</tr>
+			-->
+			<tr valign="top">
+				<th scope="row"> Limit: <small>number of allowed sessions</small> </th>
+				<td>
+					<select class="regular-text" name="wp_limit_logins_number" >
+					<?php
+						for($i=1; $i <= 10; $i++):
+							echo "<option ", (get_option('wp_limit_logins_number') == $i)? "selected":'', "> {$i} </option>";
+						endfor;
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"> Interval: <small>hours between the last session</small> </th>
+				<td>
+					<select class="regular-text" name="wp_limit_logins_hours" >
+					<?php
+						for($i=1; $i <= 24; $i++):
+							echo "<option ", (get_option('wp_limit_logins_hours') == $i)? "selected":'', "> {$i} </option>";
+						endfor;
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"> Message: <small>for when reach the limit</small> </th>
+				<td>
+					<input type="text" class="regular-text" name="wp_limit_logins_message" value="<?= get_option('wp_limit_logins_message') ?>" >
+				</td>
+			</tr>
+		</table>
+		<?php
+			// 
+			submit_button('Save');
+		?>
+	</form>
+</div>
+<script type="text/javascript">
+	(function (context) {
+		context.find('th').css({
+			position: 'relative',
+		}).find('small').css({
+			position: 'absolute',
+			top: 36,
+			left: 'auto',
+			right: -1,
+			fontWeight: 'initial',
+			opacity: 0.74
+		});
+	})(jQuery('#wp_limit_logins_config'));
+</script>
