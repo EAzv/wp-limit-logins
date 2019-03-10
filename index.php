@@ -33,33 +33,6 @@ add_filter('authenticate', function ($user, $username, $password){
 	return	Limit_Logins::Execute($user, $username, $password);
 }, 30, 3);
 
-//
-add_action('wp_footer', function(){
-	echo "\n\n<!-- Limit Logins Debugger -->\n\n";
-
-	echo "<!-- ";
-	echo "\n session_limit: ",  Limit_Logins::$session_limit;
-	echo "\n time_limit: ",  Limit_Logins::$time_limit;
-	echo "\n logout_oldest: ",  Limit_Logins::$logout_oldest;
-	echo "\n error_msg: ",  Limit_Logins::$error_msg;
-	echo "\n error_code: ",  Limit_Logins::$error_code;
-	echo "\n session_count: ", Limit_Logins::$session_count;
-	echo "\n time: ", time();
-	echo "\n-->\n";
-
-	foreach(Limit_Logins::getSessions() as $session):
-		$verifier = Limit_Logins::getVerifier($session);
-		echo "\n<!-- ",
-			$verifier, ": ", date("d/m/Y H:i:s", $session['last_activity']),
-		   	" -->";
-	endforeach;
-
-	echo "\n<!-- Sessions: ", print_r(Limit_Logins::getSessions(), true), "-->\n";
-	echo "\n<!-- Oldest session: ", print_r(Limit_Logins::getOldestSession(), true), "-->\n";
- 
-});
-
-
 
 /**
  * Add the plugin link in settings on the side bar
