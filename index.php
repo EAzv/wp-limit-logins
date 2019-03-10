@@ -1,11 +1,11 @@
 <?php
 /*
  *	Plugin Name: WP Limit Logins
- *	Plugin URI: http://example.com/
- *	Description: Limits the number of active sessions for a user login
+ *	Plugin URI: https://github.com/EAzv/wp-limit-logins
+ *	Description: Limits the number of concurrent logins per user 
  *	Version: 0.1
  *	Author: Eduardo Azevedo
- *	Author URI: https://github.com/EAzv
+ *	Author URI: http://eazv.net/
  */
 
 defined('ABSPATH') or die('Never here');
@@ -62,11 +62,11 @@ add_action('wp_footer', function(){
 
 
 /**
- * Add the plugin link on the side bar
+ * Add the plugin link in settings on the side bar
  * and setup the setup form
  */
 add_action('admin_menu', function (){
-	add_management_page(
+	add_options_page(
 		'WP Limit Logins',
 		'Limit Logins',
 		'manage_options',
